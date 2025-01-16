@@ -117,6 +117,8 @@ STATIC_ROOT = str(BASE_DIR.joinpath("assets/staticfiles"))
 MEDIA_URL = "media/"
 MEDIA_ROOT = str(BASE_DIR.joinpath("assets/media"))
 
+LOCALE_MIDDLEWARE_EXCLUDED_PATHS = ["/media/", "/static/"]
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
