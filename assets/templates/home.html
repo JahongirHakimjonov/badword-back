@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yomon so'zlar</title>
+
+
+    <meta name="description"
+          content="Yomon va nomaqbul so‘zlarni yig‘uvchi platforma. Toza va ijobiy muloqotni ta'minlash uchun ma'lumotlar bazasi!">
+    <meta name="keywords"
+          content="so'kinishlar, yomon so‘zlar, nomaqbul so‘zlar, senzura, toza muloqot, platforma, ijobiy muhit, ma'lumotlar bazasi">
+    <meta name="author" content="Jahongir Hakimjonov">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Yomon So‘zlar Arxivi - Senzura Qiluvchi Platforma">
+    <meta property="og:description"
+          content="Yomon va nomaqbul so‘zlarni yig‘uvchi platforma. Toza va ijobiy muloqotni ta'minlash uchun ma'lumotlar bazasi!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://badwords.milliytech.uz/">
+    <meta property="og:image" content="https://api.badwords.milliytech.uz/static/images/bad.webp">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yomon So‘zlar Arxivi - Senzura Qiluvchi Platforma">
+    <meta name="twitter:description"
+          content="Yomon va nomaqbul so‘zlarni yig‘uvchi platforma. Toza va ijobiy muloqotni ta'minlash uchun ma'lumotlar bazasi!">
+    <meta name="twitter:image" content="https://api.badwords.milliytech.uz/static/images/bad.webp">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://badwords.milliytech.uz/">
+
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --background: #f3f4f6;
+            --foreground: #111827;
+            --primary: #000000;
+            --primary-hover: #1f2937;
+            --secondary: #e5e7eb;
+            --border: #d1d5db;
+            --accent: #3b82f6;
+
+            --dark-background: #1a1a1a;
+            --dark-foreground: #e0e0e0;
+            --dark-primary: #ffffff;
+            --dark-primary-hover: #cccccc;
+            --dark-secondary: #333333;
+            --dark-border: #ffffff;
+            --dark-accent: #60a5fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+
+        #themeToggle {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body:not(.dark-mode) #themeToggle .material-symbols-outlined {
+            color: #111827;
+        }
+
+        body.dark-mode #themeToggle .material-symbols-outlined {
+            color: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.5s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-background);
+            color: var(--dark-foreground);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            transition: all 0.5s ease;
+            flex: 1;
+        }
+
+        body.dark-mode .container {
+            background-color: var(--dark-secondary);
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(255, 255, 255, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 2.5rem;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode h1 {
+            color: var(--dark-primary);
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid var(--border);
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode input[type="text"] {
+            background-color: var(--dark-background);
+            color: var(--dark-foreground);
+            border-color: var(--dark-border);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode button {
+            background-color: var(--dark-primary);
+            color: var(--dark-background);
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode button:hover {
+            background-color: var(--dark-primary-hover);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        #addButton {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #wordCount {
+            font-size: 14px;
+            color: var(--foreground);
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode #wordCount {
+            color: var(--dark-foreground);
+        }
+
+        #sortButton {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode #sortButton {
+            background-color: var(--dark-secondary);
+            color: var(--dark-primary);
+        }
+
+        #sortButton:hover {
+            background-color: var(--border);
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #sortButton:hover {
+            background-color: var(--dark-border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        th {
+            background-color: var(--secondary);
+            font-weight: 600;
+            color: var(--primary);
+            border-radius: 8px;
+        }
+
+        body.dark-mode th {
+            background-color: var(--dark-secondary);
+            color: var(--dark-primary);
+        }
+
+        td {
+            background-color: var(--background);
+            border-radius: 8px;
+        }
+
+        body.dark-mode td {
+            background-color: var(--dark-background);
+        }
+
+        tr {
+            transition: transform 0.3s ease;
+        }
+
+        tr:hover {
+            transform: translateY(-2px);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:disabled {
+            background-color: var(--secondary);
+            color: var(--foreground);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        body.dark-mode .pagination button:disabled {
+            background-color: var(--dark-secondary);
+            color: var(--dark-border);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            input[type="text"], button {
+                font-size: 14px;
+            }
+        }
+
+        #themeToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            font-size: 20px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #themeToggle:hover {
+            background-color: var(--border);
+            transform: scale(1.1);
+        }
+
+        body.dark-mode #themeToggle {
+            background-color: var(--dark-secondary);
+            color: var(--dark-primary);
+        }
+
+        body.dark-mode #themeToggle:hover {
+            background-color: var(--dark-border);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode footer {
+            background-color: var(--dark-secondary);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-description {
+            max-width: 400px;
+            margin: 0 auto;
+            font-size: 14px;
+            color: var(--foreground);
+        }
+
+        body.dark-mode .footer-description {
+            color: var(--dark-foreground);
+        }
+
+        .social-icon {
+            filter: invert(0);
+            transition: filter 0.3s ease;
+        }
+
+        body.dark-mode .social-icon {
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body>
+<div class="container fade-in">
+    <h1>Yomon so'zlar</h1>
+    <div class="input-group">
+        <input type="text" id="wordInput" placeholder="So'zni kiriting..." aria-label="Search or add a word">
+        <button id="addButton" title="Add new word(s)">Qo'shish</button>
+    </div>
+    <div class="controls">
+        <span id="wordCount">Jami so'zlar: 0</span>
+        <button id="sortButton" title="Sort words">Saralash ↓</button>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>So'z</th>
+        </tr>
+        </thead>
+        <tbody id="wordList"></tbody>
+    </table>
+    <div class="pagination">
+        <button id="prevButton" title="Previous page">Boshlang'ich</button>
+        <span id="pageInfo">Sahifa 1 of 1</span>
+        <button id="nextButton" title="Next page">Keyingisi</button>
+    </div>
+</div>
+<footer>
+    <div class="footer-content">
+        <div class="social-icons">
+            <a href="https://t.me/ja_khan_gir" target="_blank" rel="noopener noreferrer"
+               aria-label="Telegram">
+                <img class="social-icon" src="https://panda.felixits.uz/static/images/telegram-icon.svg"
+                     alt="Telegram Icon">
+            </a>
+            <a href="https://www.instagram.com/ja_khan_gir/" target="_blank" rel="noopener noreferrer"
+               aria-label="Instagram">
+                <img class="social-icon" src="https://panda.felixits.uz/static/images/instagram-icon.svg"
+                     alt="Instagram Icon">
+            </a>
+            <a href="https://github.com/JahongirHakimjonov" target="_blank" rel="noopener noreferrer"
+               aria-label="GitHub">
+                <img class="social-icon" src="https://panda.felixits.uz/static/images/github-icon.svg"
+                     alt="GitHub Icon">
+            </a>
+        </div>
+        <p class="footer-description">
+            Bu veb-sayt o'zbek tilidagi yomon so'zlar ro'yxatini saqlash va ko'rish uchun yaratilgan. Siz ham yomon
+            so'zlar
+            ro'yxatiga bilgan so'zlaringizni qo'shishingiz mumkin.
+        </p>
+    </div>
+</footer>
+<button id="themeToggle" title="Toggle light/dark mode">
+    <span class="material-symbols-outlined">clear_day</span>
+</button>
+
+<script>
+    const API_BASE_URL = 'https://api.badwords.milliytech.uz/api/v1/badword/';
+
+    const wordInput = document.getElementById('wordInput');
+    const addButton = document.getElementById('addButton');
+    const sortButton = document.getElementById('sortButton');
+    const wordList = document.getElementById('wordList');
+    const wordCount = document.getElementById('wordCount');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    const pageInfo = document.getElementById('pageInfo');
+
+    let currentPage = 1;
+    let totalPages = 1;
+    let sortOrder = 'asc';
+
+    async function fetchWords() {
+        try {
+            const response = await fetch(`${API_BASE_URL}?page=${currentPage}&page_size=5&sort=${sortOrder === 'asc' ? 'word' : '-word'}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching words:', error);
+            return null;
+        }
+    }
+
+
+    async function addWord(word) {
+        try {
+            const response = await fetch(API_BASE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({word}),
+            });
+            if (response.ok) {
+                updateWordList();
+            } else {
+                console.error('Failed to add word');
+            }
+        } catch (error) {
+            console.error('Error adding word:', error);
+        }
+    }
+
+    function updateWordList() {
+        fetchWords().then(data => {
+            if (data) {
+                wordList.innerHTML = data.data.map(item => `
+                    <tr class="fade-in">
+                        <td>${item.word}</td>
+                    </tr>
+                `).join('');
+
+                wordCount.textContent = `Jami so'zlar: ${data.total_items}`;
+                pageInfo.textContent = `Sahifa ${data.current_page} of ${data.total_pages}`;
+                totalPages = data.total_pages;
+                updatePaginationButtons();
+            }
+        });
+    }
+
+    function updatePaginationButtons() {
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+    }
+
+    function sortWords() {
+        sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        sortButton.textContent = `Saralash ${sortOrder === 'asc' ? '↓' : '↑'}`;
+        updateWordList();
+    }
+
+    addButton.addEventListener('click', () => {
+        const newWord = wordInput.value.trim();
+        if (newWord) {
+            addWord(newWord);
+            wordInput.value = '';
+        }
+    });
+
+    sortButton.addEventListener('click', sortWords);
+
+    prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            updateWordList();
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            updateWordList();
+        }
+    });
+
+    wordInput.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            addButton.click();
+        }
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function toggleTheme() {
+        const isDarkMode = body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        updateThemeIcon(isDarkMode);
+    }
+
+    function updateThemeIcon(isDarkMode) {
+        themeToggle.innerHTML = `<span class="material-symbols-outlined">${isDarkMode ? 'dark_mode' : 'clear_day'}</span>`;
+    }
+
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const useDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark);
+        body.classList.toggle('dark-mode', useDarkMode);
+        updateThemeIcon(useDarkMode);
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            body.classList.toggle('dark-mode', e.matches);
+            updateThemeIcon(e.matches);
+        }
+    });
+
+    initializeTheme();
+    updateWordList();
+</script>
+</body>
+</html>
