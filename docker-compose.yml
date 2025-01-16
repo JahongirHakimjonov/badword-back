@@ -31,9 +31,9 @@ services:
       - pg_data:/var/lib/postgresql/data
 
 
-#  redis:
-#    image: redis:latest
-#    restart: always
+  redis:
+    image: redis:latest
+    restart: always
 
 
 #  rabbitmq:
@@ -52,36 +52,36 @@ services:
 
 
 
-#  celery_worker:
-#    build:
-#      context: .
-#      dockerfile: ./deployments/compose/django/Dockerfile
-#    command: /start-celeryworker
-#    restart: always
-#    volumes:
-#      - .:/app
-#    env_file:
-#      - .env
-#    depends_on:
-#      - redis
+  celery_worker:
+    build:
+      context: .
+      dockerfile: ./deployments/compose/django/Dockerfile
+    command: /start-celeryworker
+    restart: always
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
 #      - rabbitmq
-#      - db
+      - db
 
 
-#  celery_beat:
-#    build:
-#      context: .
-#      dockerfile: ./deployments/compose/django/Dockerfile
-#    command: /start-celerybeat
-#    restart: always
-#    volumes:
-#      - .:/app
-#    env_file:
-#      - .env
-#    depends_on:
-#      - redis
+  celery_beat:
+    build:
+      context: .
+      dockerfile: ./deployments/compose/django/Dockerfile
+    command: /start-celerybeat
+    restart: always
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
 #      - rabbitmq
-#      - db
+      - db
 
 
 #  flower:
@@ -106,5 +106,5 @@ services:
 volumes:
   pg_data:
     driver: local
-#  rabbitmq:
-#    driver: local
+  rabbitmq:
+    driver: local
