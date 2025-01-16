@@ -18,7 +18,7 @@ class WordListAPIView(APIView):
     def get_queryset(self):
         return Word.objects.filter(is_active=True)
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     def get(self, request, format=None):
         ordering = request.query_params.get("sort")
         search = request.query_params.get("search")
