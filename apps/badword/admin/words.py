@@ -6,7 +6,7 @@ from apps.badword.models import Word
 
 @admin.register(Word)
 class WordAdmin(ModelAdmin):
-    list_display = ["word", "is_active"]
+    list_display = ["id", "word", "is_active", "created_at", "updated_at"]
     search_fields = ["word"]
     list_filter = ["is_active"]
     actions = ["activate", "deactivate"]
