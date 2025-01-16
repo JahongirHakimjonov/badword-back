@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yomon so'zlar</title>
 
-
     <meta name="description"
           content="Yomon va nomaqbul so‘zlarni yig‘uvchi platforma. Toza va ijobiy muloqotni ta'minlash uchun ma'lumotlar bazasi!">
     <meta name="keywords"
@@ -33,7 +32,6 @@
 
     <!-- Canonical Link -->
     <link rel="canonical" href="https://badwords.milliytech.uz/">
-
 
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
@@ -247,24 +245,7 @@
         }
 
         #sortButton {
-            background-color: var(--secondary);
-            color: var(--primary);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode #sortButton {
-            background-color: var(--dark-secondary);
-            color: var(--dark-primary);
-        }
-
-        #sortButton:hover {
-            background-color: var(--border);
-            transform: translateY(-2px);
-        }
-
-        body.dark-mode #sortButton:hover {
-            background-color: var(--dark-border);
+            display: none;
         }
 
         table {
@@ -310,29 +291,7 @@
         }
 
         .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .pagination button {
-            padding: 8px 16px;
-            font-size: 14px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .pagination button:disabled {
-            background-color: var(--secondary);
-            color: var(--foreground);
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
-        body.dark-mode .pagination button:disabled {
-            background-color: var(--dark-secondary);
-            color: var(--dark-border);
+            display: none;
         }
 
         @media (max-width: 480px) {
@@ -454,45 +413,42 @@
     </div>
     <div class="controls">
         <span id="wordCount">Jami so'zlar: 0</span>
-        <button id="sortButton" title="Sort words">Saralash ↓</button>
     </div>
     <table>
         <thead>
         <tr>
-            <th>So'z</th>
+
         </tr>
         </thead>
         <tbody id="wordList"></tbody>
     </table>
-    <div class="pagination">
-        <button id="prevButton" title="Previous page">Boshlang'ich</button>
-        <span id="pageInfo">Sahifa 1 of 1</span>
-        <button id="nextButton" title="Next page">Keyingisi</button>
-    </div>
 </div>
 <footer>
     <div class="footer-content">
         <div class="social-icons">
-            <a href="https://t.me/ja_khan_gir" target="_blank" rel="noopener noreferrer"
-               aria-label="Telegram">
-                <img class="social-icon" src="https://panda.felixits.uz/static/images/telegram-icon.svg"
+            <a href="https://t.me/ja_khan_gir" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                <img class="social-icon" src="https://api.badwords.milliytech.uz/static/images/telegram-icon.svg"
                      alt="Telegram Icon">
             </a>
             <a href="https://www.instagram.com/ja_khan_gir/" target="_blank" rel="noopener noreferrer"
                aria-label="Instagram">
-                <img class="social-icon" src="https://panda.felixits.uz/static/images/instagram-icon.svg"
+                <img class="social-icon" src="https://api.badwords.milliytech.uz/static/images/instagram-icon.svg"
                      alt="Instagram Icon">
             </a>
             <a href="https://github.com/JahongirHakimjonov" target="_blank" rel="noopener noreferrer"
                aria-label="GitHub">
-                <img class="social-icon" src="https://panda.felixits.uz/static/images/github-icon.svg"
+                <img class="social-icon" src="https://api.badwords.milliytech.uz/static/images/github-icon.svg"
                      alt="GitHub Icon">
+            </a>
+            <a href="https://github.com/JahongirHakimjonov" target="_blank" rel="noopener noreferrer"
+               aria-label="Download">
+                <img class="social-icon" src="https://api.badwords.milliytech.uz/static/images/download.svg"
+                     alt="Download Icon">
             </a>
         </div>
         <p class="footer-description">
             Bu veb-sayt o'zbek tilidagi yomon so'zlar ro'yxatini saqlash va ko'rish uchun yaratilgan. Siz ham yomon
-            so'zlar
-            ro'yxatiga bilgan so'zlaringizni qo'shishingiz mumkin.
+            so'zlar ro'yxatiga bilgan so'zlaringizni qo'shishingiz mumkin.
         </p>
     </div>
 </footer>
@@ -505,20 +461,12 @@
 
     const wordInput = document.getElementById('wordInput');
     const addButton = document.getElementById('addButton');
-    const sortButton = document.getElementById('sortButton');
     const wordList = document.getElementById('wordList');
     const wordCount = document.getElementById('wordCount');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const pageInfo = document.getElementById('pageInfo');
-
-    let currentPage = 1;
-    let totalPages = 1;
-    let sortOrder = 'asc';
 
     async function fetchWords() {
         try {
-            const response = await fetch(`${API_BASE_URL}?page=${currentPage}&page_size=5&sort=${sortOrder === 'asc' ? 'word' : '-word'}`);
+            const response = await fetch(`${API_BASE_URL}`);
             const data = await response.json();
             return data;
         } catch (error) {
@@ -526,7 +474,6 @@
             return null;
         }
     }
-
 
     async function addWord(word) {
         try {
@@ -550,29 +497,9 @@
     function updateWordList() {
         fetchWords().then(data => {
             if (data) {
-                wordList.innerHTML = data.data.map(item => `
-                    <tr class="fade-in">
-                        <td>${item.word}</td>
-                    </tr>
-                `).join('');
-
                 wordCount.textContent = `Jami so'zlar: ${data.total_items}`;
-                pageInfo.textContent = `Sahifa ${data.current_page} of ${data.total_pages}`;
-                totalPages = data.total_pages;
-                updatePaginationButtons();
             }
         });
-    }
-
-    function updatePaginationButtons() {
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage === totalPages;
-    }
-
-    function sortWords() {
-        sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-        sortButton.textContent = `Saralash ${sortOrder === 'asc' ? '↓' : '↑'}`;
-        updateWordList();
     }
 
     addButton.addEventListener('click', () => {
@@ -580,22 +507,6 @@
         if (newWord) {
             addWord(newWord);
             wordInput.value = '';
-        }
-    });
-
-    sortButton.addEventListener('click', sortWords);
-
-    prevButton.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            updateWordList();
-        }
-    });
-
-    nextButton.addEventListener('click', () => {
-        if (currentPage < totalPages) {
-            currentPage++;
-            updateWordList();
         }
     });
 
