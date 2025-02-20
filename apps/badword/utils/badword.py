@@ -13,7 +13,7 @@ def bad_word_filter(text):
         return []
 
     pattern = re.compile(
-        r"\b(" + "|".join(map(re.escape, bad_words)) + r")\b", re.IGNORECASE
+        r"\b(" + "|".join(map(re.escape, bad_words)) + r")\w*", re.IGNORECASE
     )
     found_words = set(pattern.findall(text))
 
