@@ -24,6 +24,15 @@ class BadWordFilterView(APIView):
 
         bad_words = bad_word_filter(text)
 
+        if len(bad_words) == 0:
+            return Response(
+                {
+                    "success": True,
+                    "message": "No bad words found",
+                    "data": [],
+                }
+            )
+
         return Response(
             {
                 "success": True,
