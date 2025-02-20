@@ -14,7 +14,11 @@ class BadWordFilterView(APIView):
 
         if not text:
             return Response(
-                {"error": "text query parameter is required"},
+                {
+                    "success": False,
+                    "message": "text query parameter is required",
+                    "data": {},
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
