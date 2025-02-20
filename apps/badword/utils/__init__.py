@@ -1,0 +1,1 @@
+from .badword import *  # noqa
