@@ -23,7 +23,29 @@ class WordListAPIView(APIView):
         ordering = request.query_params.get("sort")
         search = request.query_params.get("search")
         if ordering:
-            words = self.get_queryset().order_by(ordering)
+            if ordering in ["word", "-word", "created_at", "-created_at", "updated_at", "-updated_at", "id", "-id"]:
+                words = self.get_queryset().order_by(ordering)
+            else:
+                return Response(
+                    {
+                        "success": False,
+                        "message": "Invalid ordering parameter",
+                        "data": {
+                            "ordering": ordering,
+                            "valid_ordering": [
+                                "word",
+                                "-word",
+                                "created_at",
+                                "-created_at",
+                                "updated_at",
+                                "-updated_at",
+                                "id",
+                                "-id",
+                            ],
+                        },
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
         elif search:
             words = self.get_queryset().filter(word__icontains=search)
         else:
