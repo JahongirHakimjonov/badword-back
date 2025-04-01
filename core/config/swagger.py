@@ -14,9 +14,7 @@ urlpatterns = [
     ),
     path(
         "api/schema/swagger-ui/",
-        login_required(
-            SpectacularSwaggerView.as_view(url_name="schema"), login_url="/admin/"
-        ),
+            SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
     path(
