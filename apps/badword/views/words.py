@@ -28,6 +28,7 @@ class WordListAPIView(APIView):
                 type=str,
                 required=False,
                 description="Параметр сортировки",
+                enum=["word", "-word", "created_at", "-created_at", "updated_at", "-updated_at", "id", "-id"],
             ),
             OpenApiParameter(
                 name="search",
