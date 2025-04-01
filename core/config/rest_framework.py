@@ -24,6 +24,7 @@ SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_DIST": "SIDECAR",
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
-    "TITLE": "Django Rest API",
-    "DESCRIPTION": "Django Rest API",
+    "TITLE": "Uzbek Badwords Django Rest API",
+    "DESCRIPTION": "🟡Yomon So‘zlar Arxivi - Senzura Qiluvchi Platforma",
+    "SCHEMA_PATH_PREFIX": "/api/v1",
 }
