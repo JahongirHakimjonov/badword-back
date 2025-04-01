@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.urls import path
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -9,19 +8,16 @@ from drf_spectacular.views import (
 urlpatterns = [
     path(
         "schema/",
-        login_required(SpectacularAPIView.as_view(), login_url="/admin/"),
-        name="schema",
-    ),
+        SpectacularAPIView.as_view(),
+        name="schema"),
     path(
         "api/schema/swagger-ui/",
-            SpectacularSwaggerView.as_view(url_name="schema"),
+        SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
     path(
         "api/schema/redoc/",
-        login_required(
-            SpectacularRedocView.as_view(url_name="schema"), login_url="/admin/"
-        ),
+        SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
 ]
