@@ -1,5 +1,6 @@
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -18,6 +19,51 @@ class WordListAPIView(APIView):
     def get_queryset(self):
         return Word.objects.filter(is_active=True)
 
+    @extend_schema(
+        summary="List Words",
+        description="Получение списка активных слов с возможностью сортировки и поиска",
+        parameters=[
+            OpenApiParameter(
+                name="sort",
+                type=str,
+                required=False,
+                description="Параметр сортировки",
+            ),
+            OpenApiParameter(
+                name="search",
+                type=str,
+                required=False,
+                description="Параметр поиска",
+            ),
+        ],
+        responses={
+            200: WordSerializer(many=True),
+            400: {
+                'description': 'Invalid ordering parameter',
+                'content': {
+                    'application/json': {
+                        'example': {
+                            "success": False,
+                            "message": "Invalid ordering parameter",
+                            "data": {
+                                "ordering": "invalid_param",
+                                "valid_ordering": [
+                                    "word",
+                                    "-word",
+                                    "created_at",
+                                    "-created_at",
+                                    "updated_at",
+                                    "-updated_at",
+                                    "id",
+                                    "-id",
+                                ],
+                            },
+                        }
+                    }
+                }
+            },
+        }
+    )
     @method_decorator(cache_page(60 * 30))
     def get(self, request, format=None):
         ordering = request.query_params.get("sort")
@@ -57,6 +103,7 @@ class WordListAPIView(APIView):
 
         return paginator.get_paginated_response(serializer.data)
 
+    @extend_schema(exclude=True)
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
